@@ -1,7 +1,7 @@
 // Main Express server: connects to MongoDB and mounts all routes.
 
-require("dotenv").config();
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -10,7 +10,14 @@ const movieRoutes = require("./routes/movies");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/movierecommender";
+const DEFAULT_LOCAL_MONGO_URI = "mongodb://localhost:27017/movierecommender";
+const isHostedEnvironment = process.env.NODE_ENV === "production" || Boolean(process.env.RENDER);
+const MONGO_URI = process.env.MONGO_URI?.trim() || (isHostedEnvironment ? "" : DEFAULT_LOCAL_MONGO_URI);
+
+if (!MONGO_URI) {
+  console.error("Missing MONGO_URI. Add your MongoDB Atlas connection string in the Render environment variables.");
+  process.exit(1);
+}
 
 app.use(cors()); // Allow requests from the frontend.
 app.use(express.json()); // Parse JSON request bodies.
@@ -40,7 +47,7 @@ app.use((err, req, res, next) => {
 mongoose
   .connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 })
   .then(() => {
-    console.log("Connected to MongoDB:", MONGO_URI);
+    console.log("Connected to MongoDB");
     const server = app.listen(PORT, () => {
       console.log(`Server running at http://localhost:${PORT}`);
       console.log(`API base: http://localhost:${PORT}/api/movies`);
