@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineMatch — Movie Recommender</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="logo" onclick="location.reload()">Cine<span>Match</span></div>
+    <div class="header-search">
+      <div class="search-input-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search movies, directors…" autocomplete="off" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <h1>Find Your Next <em>Favourite</em> Film</h1>
+    <p>Browse by genre, filter by mood, and discover movies curated just for you.</p>
+  </section>
+
+  <!-- ── Filters ── -->
+  <section class="ai-assistant-section">
+    <div class="ai-assistant">
+      <div class="ai-copy">
+        <span class="ai-kicker">Movie Assistant</span>
+        <h2>Tell me your mood, I’ll pick the movies.</h2>
+      </div>
+      <form class="ai-form" id="aiForm">
+        <input
+          type="text"
+          id="aiPrompt"
+          placeholder="Try: I want a funny feel-good movie for family night"
+          autocomplete="off"
+        />
+        <button type="submit">Suggest</button>
+      </form>
+      <div class="ai-result" id="aiResult"></div>
+    </div>
+  </section>
+
+  <section class="filters-section">
+    <div class="filter-group">
+      <label>Genre</label>
+      <div class="filter-chips" id="genreChips">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+    <div class="filter-group">
+      <label>Mood</label>
+      <div class="filter-chips" id="moodChips">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+    <div class="filter-sort">
+      <label style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim)">Sort</label>
+      <select id="sortSelect">
+        <option value="rating">Top Rated</option>
+        <option value="year">Newest</option>
+        <option value="ratingCount">Most Reviewed</option>
+        <option value="title">A–Z</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content">
+    <div class="section-header">
+      <h2 class="section-title">Movies</h2>
+      <span class="section-count" id="resultCount"></span>
+    </div>
+    <div class="movies-grid" id="moviesGrid">
+      <!-- Populated by JS -->
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <!-- ── Movie Detail Modal ── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div id="modalContent">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <p>🎬 CineMatch — Movie Recommendation System &nbsp</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
