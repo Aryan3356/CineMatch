@@ -1,6 +1,6 @@
 
-
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const mongoose = require("mongoose");
 const Movie = require("./models/Movie");
 const indianMovies = require("./indianMovies");
