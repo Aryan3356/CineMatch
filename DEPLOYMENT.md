@@ -2,9 +2,11 @@
 
 ## Render Web Service Settings
 
-- Root Directory: `backend`
-- Build Command: `npm install`
-- Start Command: `npm start`
+- Root Directory: leave blank
+- Build Command: `cd backend && npm install`
+- Start Command: `cd backend && npm start`
+
+Leave the root directory blank so Render deploys both folders. The backend serves the frontend from `frontend/public`.
 
 ## Environment Variables on Render
 
